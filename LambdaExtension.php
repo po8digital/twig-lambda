@@ -19,13 +19,13 @@ class LambdaExtension extends \Twig_Extension
     {
         return [
             [
-                '=>' => [
+                '==>' => [
                     'precedence' => 0,
                     'class' => '\DPolac\TwigLambda\NodeExpression\SimpleLambda'
                 ],
             ],
             [
-                '=>' => [
+                '==>' => [
                     'precedence' => 0,
                     'class' => '\DPolac\TwigLambda\NodeExpression\LambdaWithArguments',
                     'associativity' => \Twig_ExpressionParser::OPERATOR_LEFT
@@ -38,7 +38,7 @@ class LambdaExtension extends \Twig_Extension
             ]
         ];
     }
-    
+
     public function getFunctions()
     {
         return [
@@ -69,14 +69,14 @@ class LambdaExtension extends \Twig_Extension
             new \Twig_SimpleFilter('count_by', '\DPolac\TwigLambda\LambdaExtension::countBy'),
         ];
     }
-    
-    public static function map($array, $callback) 
+
+    public static function map($array, $callback)
     {
         if (!is_callable($callback)) {
             throw new \Twig_Error_Runtime(sprintf(
                 'Second argument of "map" must be callable, but is "%s".', gettype($callback)));
         }
-        
+
         if (is_array($array)) {
             $array = array_map($callback, $array, array_keys($array));
         } elseif ($array instanceof \Traversable) {
@@ -89,7 +89,7 @@ class LambdaExtension extends \Twig_Extension
             throw new \Twig_Error_Runtime(sprintf(
                 'First argument of "map" must be array or Traversable, but is "%s".', gettype($array)));
         }
-        
+
         return $array;
     }
 
@@ -143,7 +143,7 @@ class LambdaExtension extends \Twig_Extension
         } else {
             $result = [];
         }
-        
+
         foreach ($array as $i => $item) {
             foreach ($array as $j => $previous) {
                 if ($i === $j) {
@@ -242,7 +242,7 @@ class LambdaExtension extends \Twig_Extension
         }
         return $result;
     }
-    
+
     public static function every($array, $callback)
     {
         if (!is_callable($callback)) {
@@ -263,7 +263,7 @@ class LambdaExtension extends \Twig_Extension
 
         return true;
     }
-    
+
     public static function any($array, $callback)
     {
         if (!is_callable($callback)) {
